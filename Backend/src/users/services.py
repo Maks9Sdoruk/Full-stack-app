@@ -1,4 +1,4 @@
-from src.common.users.service import UsersService
+from common.users.service import UsersService
 
 
 class UserService:

@@ -1,5 +1,5 @@
-from src.common.users.schema import UserBase
-from src.database import read_database, write_database
+from common.users.schema import UserBase
+from database import read_database, write_database
 
 
 class UsersService:

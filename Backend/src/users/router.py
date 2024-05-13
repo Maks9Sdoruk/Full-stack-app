@@ -1,7 +1,7 @@
 from fastapi import APIRouter, HTTPException
-from src.users.services import UserService
-from src.common.users.service import UsersService
-from src.common.users.schema import UserBase
+from users.services import UserService
+from common.users.service import UsersService
+from common.users.schema import UserBase
 
 router = APIRouter(prefix="/user")
 users_service = UsersService()
