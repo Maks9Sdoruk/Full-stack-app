@@ -3,15 +3,13 @@ from users.services import UserService
 from common.users.service import UsersService
 from common.users.schema import UserBase
 
-router = APIRouter(prefix="/user")
+router = APIRouter(prefix="")
 users_service = UsersService()
 
 
 @router.post("/user")
 def create_user(name: str, email: str):
     return users_service.create(name, email)
-
-
 
 
 @router.get("/user/{user_id}", response_model=UserBase)
@@ -33,6 +31,7 @@ def update_user(user_id: int, name: str):
 def delete_user(user_id: int):
     users_service.delete(user_id)
     return {"message": f"User with ID {user_id} deleted successfully"}
+
 
 @router.get("/")
 def read_root():

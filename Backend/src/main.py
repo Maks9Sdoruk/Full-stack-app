@@ -1,8 +1,10 @@
 import json
+import uvicorn
 from fastapi import FastAPI
 from pydantic import BaseModel
 from users.router import router
 from fastapi.middleware.cors import CORSMiddleware
+from time import *
 
 
 
@@ -17,4 +19,10 @@ app.add_middleware(
     allow_methods=["*"],  # Allows all methods
     allow_headers=["*"],  # Allows all headers
 )
+
+sleep(3)
+
+if __name__ == '__main__':
+    uvicorn.run("main:app", host="localhost", port=8000)
+
 
