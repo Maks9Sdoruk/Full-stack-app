@@ -1,24 +1,13 @@
-# Use an official Python runtime as a parent image
-FROM python:3.9-slim
+FROM python:3.11-slim-buster
 
-# Set the working directory in the container
 WORKDIR /app
 
-# Copy the current directory contents into the container at /app
-COPY . /app
-# Install any needed packages specified in requirements.txt
-RUN pip freeze > requirements.txt
-RUN pip install "fastapi[all]"
-RUN pip install uvicorn
-RUN pip install jsons
-RUN cd src
+COPY requirements.txt requirements.txt
+
+RUN pip install --upgrade pip
+RUN pip install -r requirements.txt
+
+COPY ./src ./src
 
 
-# Make port 8000 available to the world outside this container
-EXPOSE 8000
-
-# Define environment variable
-ENV NAME World
-
-# Run app.py when the container launches
-CMD ["python", "src/main.py"]
+CMD ["uvicorn", "src.main:app", "--host", "localhost", "--port", "8000"]

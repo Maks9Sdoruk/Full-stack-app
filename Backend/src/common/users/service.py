@@ -1,10 +1,10 @@
-from common.users.schema import UserBase
-from database import read_database, write_database
+from src.common.users.schema import UserBase
+from src.database import read_database, write_database
 
 
 class UsersService:
     def __init__(self):
-        pass  # Initialization logic can be added here if needed
+        pass
 
     def create(self, name: str, email: str) -> UserBase:
         data = read_database()
@@ -39,11 +39,12 @@ class UsersService:
             # Handle file or JSON decoding errors here
             return None
 
-    def update(self, id: int, name: str) -> UserBase:
+    def update(self, id: int, name: str,email:str) -> UserBase:
         data = read_database()
         for user_data in data:
             if user_data["id"] == id:
                 user_data["name"] = name
+                user_data["email"] = email
                 write_database(data)
                 return UserBase(**user_data)
         return None
