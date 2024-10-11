@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    network_mode: host  # Use host networking for backend
+    volumes:
+      - ./backend:/app  # Mounting the backend source code
+    environment:
+      - PYTHON_ENV=development
+    # No need to expose ports when using host networking
+      
+  frontend:
+    build:
+      context: ./frontend/my-app
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"  # Exposing React app on port 3000
+    volumes:
+      - ./frontend:/my-app:/app # Mounting the frontend source code
+    environment:
+      - NODE_ENV=development
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
